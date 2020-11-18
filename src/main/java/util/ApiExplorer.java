@@ -18,16 +18,16 @@ import java.io.IOException;
 public class ApiExplorer {
 	public static String getFinedustData(String place, String time) throws IOException {
 		
-		//String place = "221251"; /*측정소코드*/
-		//String time = "2020111715"; /*측정시간*/
+		//String place = "221251"; 
+		//String time = "2020111715"; 
 		
-	    StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/AirQualityInfoService/getAirQualityInfoClassifiedByStation"); /*URL*/
-	    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=QVWDM9ZUKGDJ%2BZ46qFzKBatWi3Kc8Fp1WdNpIaERUzVjt0Xq4ha9p7BYowPw079DWuvSKjQrXlIFSSI8%2FhvE0w%3D%3D"); /*Service Key*/
-	    urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
-	    urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("5", "UTF-8")); /*한 페이지 결과 수*/
-	    urlBuilder.append("&" + URLEncoder.encode("resultType","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*JSON방식으로 호출 시 파라미터 resultType=json 입력*/
-	    urlBuilder.append("&" + URLEncoder.encode("areaIndex","UTF-8") + "=" + URLEncoder.encode(place, "UTF-8")); /*측정소코드*/
-	    urlBuilder.append("&" + URLEncoder.encode("controlnumber","UTF-8") + "=" + URLEncoder.encode(time, "UTF-8")); /*측정시간*/
+	    StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/AirQualityInfoService/getAirQualityInfoClassifiedByStation"); 
+	    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=QVWDM9ZUKGDJ%2BZ46qFzKBatWi3Kc8Fp1WdNpIaERUzVjt0Xq4ha9p7BYowPw079DWuvSKjQrXlIFSSI8%2FhvE0w%3D%3D"); 
+	    urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); 
+	    urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("5", "UTF-8")); 
+	    urlBuilder.append("&" + URLEncoder.encode("resultType","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); 
+	    urlBuilder.append("&" + URLEncoder.encode("areaIndex","UTF-8") + "=" + URLEncoder.encode(place, "UTF-8")); 
+	    urlBuilder.append("&" + URLEncoder.encode("controlnumber","UTF-8") + "=" + URLEncoder.encode(time, "UTF-8")); 
 	    URL url = new URL(urlBuilder.toString());
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	    conn.setRequestMethod("GET");
@@ -65,13 +65,18 @@ public class ApiExplorer {
 		
 		Gson gson = new Gson();
 		
+		gson.fromJson(j_item.toString(), DustVO.class);
+		DustVO[] dustVOarr = gson.fromJson(j_item.toString(), DustVO[].class);
 		
-	/*	List<DustVO> list = gson.fromJson(j_item.toString(), new TypeToken<List<DustVO>>(){}.getType());
+		return dustVOarr;
+		
+		/*List<DustVO> list = gson.fromJson(j_item.toString(), new TypeToken<List<DustVO>>(){}.getType());
 		
 		for(DustVO dustVO: list) {
 			System.out.println(dustVO.getPm10());
-		} */
+		} 
 		return list;
+		*/
 	}
 }
 	
