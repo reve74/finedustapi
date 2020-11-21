@@ -2,7 +2,7 @@ package util;
 
 public class DustVO {
 
-	private String pm25;
+	private String pm25;	
 	private String pm10;
 	private String o3;
 	private String no2;

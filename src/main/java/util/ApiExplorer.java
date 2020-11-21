@@ -1,6 +1,7 @@
 package util;
 
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -16,18 +17,28 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class ApiExplorer {
+	
+	public static void main(String[] args) throws IOException {
+		
+		String place = "221251"; 
+		String time = "2020111920"; 
+		
+		System.out.println(getFinedustData(place, time));
+	}
+	
 	public static String getFinedustData(String place, String time) throws IOException {
 		
-		//String place = "221251"; 
+		//String place = "221251";
+		
 		//String time = "2020111715"; 
 		
 	    StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/AirQualityInfoService/getAirQualityInfoClassifiedByStation"); 
-	    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=QVWDM9ZUKGDJ%2BZ46qFzKBatWi3Kc8Fp1WdNpIaERUzVjt0Xq4ha9p7BYowPw079DWuvSKjQrXlIFSSI8%2FhvE0w%3D%3D"); 
-	    urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); 
-	    urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("5", "UTF-8")); 
-	    urlBuilder.append("&" + URLEncoder.encode("resultType","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); 
-	    urlBuilder.append("&" + URLEncoder.encode("areaIndex","UTF-8") + "=" + URLEncoder.encode(place, "UTF-8")); 
-	    urlBuilder.append("&" + URLEncoder.encode("controlnumber","UTF-8") + "=" + URLEncoder.encode(time, "UTF-8")); 
+	    urlBuilder.append("?ServiceKey=QVWDM9ZUKGDJ%2BZ46qFzKBatWi3Kc8Fp1WdNpIaERUzVjt0Xq4ha9p7BYowPw079DWuvSKjQrXlIFSSI8%2FhvE0w%3D%3D"); 
+	    urlBuilder.append("&pageNo=1"); 
+	    urlBuilder.append("&numOfRows=5"); 
+	    urlBuilder.append("&resultType=json"); 
+	    urlBuilder.append("&areaIndex="+ place ); 
+	    urlBuilder.append("&controlnumber="+ time); 
 	    URL url = new URL(urlBuilder.toString());
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	    conn.setRequestMethod("GET");
@@ -48,7 +59,7 @@ public class ApiExplorer {
 	        conn.disconnect();
 	       return(sb.toString());
 	}
-	
+	/*
 	public static List<DustVO> getDustJSON(String place, String time) throws Exception {
 		String result = getFinedustData(place, time);
 		//JSON처럼 생긴 String을 JSON으로 만들기
@@ -65,19 +76,18 @@ public class ApiExplorer {
 		
 		Gson gson = new Gson();
 		
-		gson.fromJson(j_item.toString(), DustVO.class);
-		DustVO[] dustVOarr = gson.fromJson(j_item.toString(), DustVO[].class);
 		
-		return dustVOarr;
-		
-		/*List<DustVO> list = gson.fromJson(j_item.toString(), new TypeToken<List<DustVO>>(){}.getType());
+
+		List<DustVO> list = gson.fromJson(j_item.toString(), new TypeToken<List<DustVO>>(){}.getType());
 		
 		for(DustVO dustVO: list) {
 			System.out.println(dustVO.getPm10());
 		} 
 		return list;
-		*/
 	}
+	 */
+	
+	
 }
 	
 

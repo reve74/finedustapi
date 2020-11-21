@@ -40,8 +40,8 @@ public class HomeController {
 		String o3 = result.get(dustVO.getO3());
 		System.out.println("o3 :"+o3);
 		
-		List<DustVO> zone = ApiExplorer.getDustJSON(place, time);
-		model.addAttribute("zone", zone);
+		//List<DustVO> zone = ApiExplorer.getDustJSON();
+		//model.addAttribute("zone", zone);
 		
 		
 		return "home";

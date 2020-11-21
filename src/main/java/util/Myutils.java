@@ -6,6 +6,7 @@ import java.util.Map;
 public class Myutils {
 	public static Map<String, String> getPlaceID() {
 		Map<String, String> result = new HashMap<String, String>();
+		
 		result.put("광복동", "221112");
 		result.put("초량동", "221131");
 		result.put("태종대", "221141");
